@@ -1,11 +1,11 @@
 
-# Project Title
+# Mausam Purbanuman
 
-A brief description of what this project does and who it's for
+Welcome to Mausam Purbanuman – Where Tomorrow Meets Today! Immerse yourself in a captivating weather forecasting experience like no other. Whether you're planning a weekend getaway, organizing outdoor events, or simply want to stay prepared for Mother Nature's moods, this web-app has got you covered! This web app seamlessly combines cutting-edge technology with the art of weather prediction, offering you real-time updates and accurate forecasts. Embrace the elements with confidence as Mausam Purbanuman empowers you to embrace the unpredictable, turning every weather moment into an unforgettable adventure!
 
 ## Tech Stack
 
-**Client:** HTML, CSS, JavaScript, API
+**Client:** HTML, CSS, JavaScript, Open Weather API
 
 ## Demo
 
@@ -13,9 +13,10 @@ Insert gif or link to demo
 
 ## Features
 
-- Feature 1
-- Feature 2
-- Feature 3
+- Provides current weather conditions at specified loaction by user
+- Provides highlights like air quality index, sunrise & sunset time, humidity, pressure, etc. at the specified location
+- Provides weather forecast of upcoming 24 hours at that location 
+- Provides weather forecast of upcoming 5 days at that location 
 
 ## Screenshots
 
@@ -50,12 +51,4 @@ Open with live server
 
 ## Authors
 
-- [@codewithsadee](https://www.github.com/codewithsadee)
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
-
-## Support
-
-For support, Join my [Patreon Comunity](https://www.patreon.com/codewithsadee/membership) or Subscribe My [YouTube Channel](https://youtube.com/@codewithsadee).# Mausam-Purbanuman
+- [@Upamdeep](https://www.github.com/HengdangKiller)
