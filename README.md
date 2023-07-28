@@ -5,11 +5,11 @@ Welcome to Mausam Purbanuman – Where Tomorrow Meets Today! Immerse yourself in
 
 ## Tech Stack
 
-**Client:** HTML, CSS, JavaScript, Open Weather API
+**Client:** HTML, CSS, Vanilla JavaScript, Open Weather API
 
 ## Demo
 
-Insert gif or link to demo
+https://mausam-purmanuman.netlify.app
 
 ## Features
 
