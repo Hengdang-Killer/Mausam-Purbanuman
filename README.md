@@ -20,8 +20,8 @@ https://mausam-purmanuman.netlify.app
 
 ## Screenshots
 
-![App Screenshot]()
-![App Screenshot](https://drive.google.com/file/d/13Q9WyQOEkn2aghE98T13EpRHe48f7lCY/view?usp=sharing)
+![Screenshot (277)](https://github.com/Hengdang-Killer/Mausam-Purbanuman/assets/136807333/e56cab71-49ce-40ac-902d-8528c7888a3f)
+![Screenshot (278)](https://github.com/Hengdang-Killer/Mausam-Purbanuman/assets/136807333/f330f512-8a74-45b8-a787-bb043a8ec653)
 
 ## Run Locally
 
