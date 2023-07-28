@@ -20,7 +20,7 @@ https://mausam-purmanuman.netlify.app
 
 ## Screenshots
 
-![App Screenshot](https://drive.google.com/file/d/12HhXnSByxmJcjz2IWvVtMGRHGGuH3FF9/view?usp=sharing)
+![App Screenshot]()
 ![App Screenshot](https://drive.google.com/file/d/13Q9WyQOEkn2aghE98T13EpRHe48f7lCY/view?usp=sharing)
 
 ## Run Locally
