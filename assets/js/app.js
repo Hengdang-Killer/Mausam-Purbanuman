@@ -59,6 +59,7 @@ searchField.addEventListener("input", function () {
           searchItem.classList.add("view-item");
 
           searchItem.innerHTML = `
+                    <li>
                     <span class="m-icon">location_on</span>
 
                     <div>
@@ -69,6 +70,7 @@ searchField.addEventListener("input", function () {
                     </div>
                     <a href="#/weather?lat=${lat}&lon=${lon}" class="item-link has-state" aria-label="${name} weather" data-search-toggler></a>
                     `;
+          </li>
 
           searchResult
             .querySelector("[data-search-list]")
