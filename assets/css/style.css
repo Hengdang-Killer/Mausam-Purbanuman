@@ -649,6 +649,12 @@ article.container::before {
   margin-inline: auto;
   margin-block: 12px;
 }
+
+.slider-card .weather_icon {
+  display: block;
+  margin: 0 auto;
+  padding: 3px;
+}
 /*-----------------------------------*\
   #FOOTER
 \*-----------------------------------*/
