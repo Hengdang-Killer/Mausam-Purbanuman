@@ -202,11 +202,11 @@ export const updateWeather = function (lat, lon) {
                             </li>
                             <li class="card-item">
                                 <p class="title-1">${so2.toPrecision(3)}</p>
-                                <p class="label-1">PM <sub>2.5</sub></p>
+                                <p class="label-1">SO <sub>2</sub></p>
                             </li>
                             <li class="card-item">
                                 <p class="title-1">${no2.toPrecision(3)}</p>
-                                <p class="label-1">NO <sub>2.5</sub></p>
+                                <p class="label-1">NO <sub>2</sub></p>
                             </li>
                             <li class="card-item">
                                 <p class="title-1">${o3.toPrecision(3)}</p>
@@ -270,7 +270,7 @@ export const updateWeather = function (lat, lon) {
 
                     <div class="wrapper">
                         <span class="m-icon">airwave</span>
-                        <p class="title-1">${pressure}<sup>hPa</sup></p>
+                        <p class="title-1">${pressure}<sub>hPa</sub></p>
                     </div>
 
                 </div>
@@ -281,7 +281,7 @@ export const updateWeather = function (lat, lon) {
 
                     <div class="wrapper">
                         <span class="m-icon">visibility</span>
-                        <p class="title-1">${visibility / 1000}<sup>km</sup></p>
+                        <p class="title-1">${visibility / 1000}<sub>km</sub></p>
                     </div>
 
                 </div>
@@ -336,7 +336,7 @@ export const updateWeather = function (lat, lon) {
                 <div class="card card-sm slider-card">
                 <p class="body-3">${module.getHours(dateTimeUnix, timezone)}</p>
                 <img src="./assets/images/weather_icons/${icon}.png" width="48" height="48" loading="lazy" alt="${description}" class="weather_icon" title="${description}">
-                <p class="body-3">${parseInt(temp)}&deg;</p>
+                <p class="body-3">${parseInt(temp)}&deg;<sup>c</sup></p>
                 </div>
                 `;
         hourlySection.querySelector("[data-temp]").appendChild(tempLi);
@@ -349,7 +349,7 @@ export const updateWeather = function (lat, lon) {
         <img src="./assets/images/weather_icons/direction.png" width="48" height="48" loading="lazy" class="weather-icon" alt="direction" style="transform:rotate(${
           windDirection - 180
         }deg)">
-        <p class="body-3">${parseInt(module.mps_to_kmh(windSpeed))}</p>
+        <p class="body-3">${parseInt(module.mps_to_kmh(windSpeed))}km/h</p>
         </div>
         `;
         hourlySection.querySelector("[data-wind]").appendChild(windLi);
