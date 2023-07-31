@@ -5,6 +5,9 @@ This file contains several utility functions and data related to weather and air
 
 
 "use strict";
+/*
+This directive is a statement that enables strict mode for the entire script or a specific function. When "use strict"; is used at the beginning of a script or a function, it enables a stricter set of rules and better error handling in the code, helping developers write more robust and secure JavaScript.
+*/
 
 
 
