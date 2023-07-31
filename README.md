@@ -52,6 +52,6 @@ Open with live server
 ```
 
 
-## Authors
+## Author
 
 - [@Upamdeep](https://www.github.com/HengdangKiller)
