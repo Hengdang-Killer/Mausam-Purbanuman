@@ -245,14 +245,32 @@ This code block is an event listener attached to the input event of the searchFi
   }
 });
 
+
+
+
+
 const container = document.querySelector("[data-container]");
+// This line selects the element with the attribute data-container in the HTML document and assigns it to the variable container. The document.querySelector() method allows us to select elements using CSS-like selectors.
+
 const loading = document.querySelector("[data-loading]");
+// This line selects the element with the attribute data-loading in the HTML document and assigns it to the variable loading.
+
 const currentLocationBtn = document.querySelector(
   "[data-current-location-btn]"
 );
+// This line selects the element with the attribute data-current-location-btn in the HTML document and assigns it to the variable currentLocationBtn.
 
 const errorContent = document.querySelector("[data-error-content]");
+// This line selects the element with the attribute data-error-content in the HTML document and assigns it to the variable errorContent.
 
+
+
+
+
+/*-----------------------------------------------WEATHER FORECAST----------------------------------------------------------*/
+/*
+This function seems to be responsible for updating the weather-related content on the web page based on the provided latitude and longitude.
+*/
 /**
  * Render all weather data in html page
  *
@@ -260,10 +278,19 @@ const errorContent = document.querySelector("[data-error-content]");
  * @param {number} lon Longitude
  */
 export const updateWeather = function (lat, lon) {
+
+
+
+
+  /*-----------------MAKING READY WEATHER STYLING-----------------*/
+/*
+This part is only responsible for preparing the elements on the web page and adjusting their styles and attributes. The actual data fetching and content updating would likely be handled elsewhere in the code.
+*/
   loading.style.display = "grid";
   container.style.overflowY = "hidden";
   container.classList.remove("fade-in");
   errorContent.style.display = "none";
+  // To hide error if previously error was shown.
 
   const currentWeatherSection = document.querySelector(
     "[data-current-weather]"
@@ -276,17 +303,33 @@ export const updateWeather = function (lat, lon) {
   highlightSection.innerHTML = "";
   hourlySection.innerHTML = "";
   forecastSection.innerHTML = "";
+  // These four lines clear the contents of the respective sections. This is done to ensure that the sections are empty before updating them with new weather data.
 
   if (window.location.hash === "#/current-location") {
     currentLocationBtn.setAttribute("disabled", "");
   } else {
     currentLocationBtn.removeAttribute("disabled");
   }
+  // The above code checks if the window's location hash contains "#/current-location". If it does, it sets the "disabled" attribute on the currentLocationBtn element, which is a button used for obtaining weather data for the user's current location. If the location hash does not contain "#/current-location", it removes the "disabled" attribute, allowing the button to be clickable.
+
+
+
+
+
+
+  /*-----------------MAIN FORECASTING BEGINS-----------------*/
+
+
 
   /**
    * CURRENT WEATHER SECTION
-   */
+   * This "updateWeather" function is responsible for fetching weather data from different APIs based on the provided latitude (lat) and longitude (lon) coordinates and then updating the web page with the retrieved weather information.
+  */
   fetchData(url.currentWeather(lat, lon), function (currentWeather) {
+    // The function starts with a call to "fetchData", which is a function used for making API requests. The function is passed a URL constructed using url.currentWeather(lat, lon), where url.currentWeather is a function that generates the appropriate URL for fetching the current weather data using the provided latitude and longitude.
+
+
+
     const {
       weather,
       dt: dateUnix,
@@ -296,9 +339,17 @@ export const updateWeather = function (lat, lon) {
       timezone,
     } = currentWeather;
     const [{ description, icon }] = weather;
+    // The function receives the currentWeather object containing various weather-related data from the API response. It destructures the required properties from currentWeather such as weather, dt, sys, main, visibility, and timezone.
+
+
+
 
     const card = document.createElement("div");
     card.classList.add("card", "card-lg", "current-weather-card");
+    // It creates an HTML element (a div element with class names "card", "card-lg", and "current-weather-card") to display the current weather information. The relevant data from the currentWeather object is used to fill in the content of this element.
+
+
+
 
     card.innerHTML = `
         <h2 class="title-2 card-title">Now</h2>
@@ -327,8 +378,18 @@ export const updateWeather = function (lat, lon) {
     fetchData(url.reverseGeo(lat, lon), function ([{ name, country }]) {
       card.querySelector("[data-location]").innerHTML = `${name}, ${country}`;
     });
+    // It then fetches reverse geolocation data (based on the latitude and longitude) using fetchData(url.reverseGeo(lat, lon)). The function receives an array containing location-related data, and it updates the "data-location" element within the previously created card element with the location name and country.
+
+
+
 
     currentWeatherSection.appendChild(card);
+    // The card element displaying the current weather information is appended to the currentWeatherSection element, to display it on the web page.
+
+
+
+
+
 
     /**
      * TODAY'S HIGHLIGHTS
@@ -463,6 +524,9 @@ export const updateWeather = function (lat, lon) {
       highlightSection.appendChild(card);
     });
 
+
+
+
     /**
      * 24H FORECAST SECTION
      */
@@ -515,6 +579,10 @@ export const updateWeather = function (lat, lon) {
         hourlySection.querySelector("[data-wind]").appendChild(windLi);
       }
 
+
+
+
+      
       /**
        * 5 DAY FORECAST SECTION
        */
@@ -546,8 +614,8 @@ export const updateWeather = function (lat, lon) {
               </span>
             </div>
             <p class="label-1">${date.getDate()} ${
-            module.monthNames[date.getUTCMonth()]
-            }</p>
+          module.monthNames[date.getUTCMonth()]
+        }</p>
             <p class="label-1">${module.weekDayNames[date.getUTCDay()]}</p>
         `;
         forecastSection.querySelector("[data-forecast-list]").appendChild(li);
