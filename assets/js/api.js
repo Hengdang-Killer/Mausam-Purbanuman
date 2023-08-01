@@ -1,15 +1,11 @@
 /*-------------------------------------FUNCTION OF THIS FILE-------------------------------------*/
 /*
-This file contains utility functions related to fetching data from the OpenWeather API. This code fetches weather data from the OpenWeather API by constructing the appropriate URLs and handling the data retrieval process using the Fetch API. The api_key variable ensures that the requests are authenticated and authorized to access the weather data.
+This file contains utility functions to fetch weather data from the OpenWeather API by constructing the appropriate URLs and handling the data retrieval process using the Fetch API. The api_key variable ensures that the requests are authenticated and authorized to access the weather data.
 */
-
 
 
 
 "use strict";
-/*
-This directive is a statement that enables strict mode for the entire script or a specific function. When "use strict"; is used at the beginning of a script or a function, it enables a stricter set of rules and better error handling in the code, helping developers write more robust and secure JavaScript.
-*/
 
 
 
@@ -23,11 +19,11 @@ This variable holds the API key used to make requests to the OpenWeather API. Th
 
 
 
-
 /*-------------------------------------FETCHING DATA FROM THE URL-------------------------------------*/
 /*
-This function is responsible for fetching data from the server using the Fetch API. It takes two parameters :-
+This function is responsible for fetching data from the server using the Fetch API. 
 
+It takes two parameters :-
 URL: The API URL to fetch data from.
 callback: A callback function that will be called with the fetched data.
 
@@ -47,10 +43,9 @@ export const fetchData = function (URL, callback) {
 
 
 
-
 /*-------------------------------------RETURNING REQUIRED URLs FOR DIFFERENT WEATHER DATA-------------------------------------*/
 /*
-The "url" object contains various functions that return specific API URLs for different types of weather data. The functions take latitude and longitude coordinates as parameters and construct the appropriate URLs for current weather, weather forecast, air pollution, and reverse geocoding requests.
+The "url" object contains various functions that return specific API URLs for different types of weather data.
 
 url.currentWeather(lat, lon): Returns the URL for fetching current weather data for the specified latitude and longitude.
 
@@ -61,9 +56,8 @@ url.airPollution(lat, lon): Returns the URL for fetching air pollution data for 
 url.reverseGeo(lat, lon): Returns the URL for reverse geocoding to find location information based on latitude and longitude.
 
 url.geo(query): Returns the URL for geocoding to find location information based on a search query (e.g., city name).
-
-These functions are useful for building the appropriate API URLs based on the desired weather data and location information.
 */
+
 export const url = {
   currentWeather(lat, lon) {
     return `https://api.openweathermap.org/data/2.5/weather?${lat}&${lon}&units=metric`;
