@@ -5,37 +5,22 @@ This file is the main file for the weather app and handles the search functional
 
 
 
-
-
-
 "use strict";
-/*
-This directive is a statement that enables strict mode for the entire script or a specific function. When "use strict"; is used at the beginning of a script or a function, it enables a stricter set of rules and better error handling in the code, helping developers write more robust and secure JavaScript.
-*/
-
-
-
 
 
 
 /*-------------------------------------------IMPORTING FILES-------------------------------------------*/
-/*
-By using these import statements, this current "app.js" file gains access to the functionalities defined in the api.js and module.js files, allowing it to make API requests, handle data, and perform various utility operations related to weather data and date formatting.
-*/
+
 import { fetchData, url } from "./api.js";
 /*
-This line imports two named exports fetchData and url from the api.js file.
 The fetchData function is used to fetch data from the server.
 url is an object containing various URL templates for different API endpoints.
 */
 
 import * as module from "./module.js";
 /*
-This line imports all exports from the module.js file and binds them to the module object.
 The module.js file contains utility functions and constants related to date and time formatting, converting units, and text descriptions for Air Quality Index (AQI) levels.
 */
-
-
 
 
 
@@ -45,23 +30,16 @@ The module.js file contains utility functions and constants related to date and 
 /*
 This is a utility function that allows us to add the same event listener to multiple elements at once. This function loops through each element in the elements NodeList and adds the specified event listener (with the provided eventType and callback) to each element.
 
-elements: This parameter is a NodeList, which is an array-like collection of DOM elements. It represents the elements to which we want to add the event listener.
+elements: This is a NodeList, which is a collection of DOM elements, which represents the elements to which we want to add the event listener.
 
-eventType: This parameter is a string that specifies the type of event you want to listen for, such as "click", "mouseover", "keydown", etc.
+eventType: This is a string that specifies the type of event you want to listen for, such as "click", "mouseover", "keydown", etc.
 
-callback: This parameter is a function that will be called whenever the specified event occurs on any of the elements. The function is commonly referred to as the event handler.
+callback: This is a function that will be called whenever the specified event occurs on any of the elements.
 */
-/**
- * Add event listener on multiple elements
- * @param {NodeList} elements Elemnts node array
- * @param {string} eventType Event Type e.g.:"click", "mouseover"
- * @param {function} callback Callback function
- */
+
 const addEventOnElements = function (elements, eventType, callback) {
   for (const element of elements) element.addEventListener(eventType, callback);
 };
-
-
 
 
 
@@ -74,18 +52,14 @@ const addEventOnElements = function (elements, eventType, callback) {
  * This code sets up a mechanism to toggle the visibility of the search view (controlled by the "active" class) when any of the elements with the [data-search-toggler] attribute is clicked.
  */
 
+
 const searchView = document.querySelector("[data-search-view]");
-//  The searchView variable is assigned the DOM element that matches the attribute [data-search-view].
 
 const searchTogglers = document.querySelectorAll("[data-search-toggler]");
-//  The "searchTogglers" variable is assigned a NodeList of DOM elements that match the attribute [data-search-toggler].
 
 const toggleSearch = () => searchView.classList.toggle("active");
-// This function is defined as an arrow function without any parameters. It uses the classList.toggle() method to add or remove the CSS class "active" to/from the searchView element. The classList.toggle() method adds the class if it's not present and removes it if it's already present.
 
 addEventOnElements(searchTogglers, "click", toggleSearch);
-// This function is called to add a click event listener to all elements in the "searchTogglers" NodeList. When any of the elements with the attribute [data-search-toggler] is clicked, the toggleSearch function will be executed, which toggles the "active" class on the searchView element.
-
 
 
 
@@ -94,84 +68,74 @@ addEventOnElements(searchTogglers, "click", toggleSearch);
 
 /*-------------------------------------------VARIABLES FOR THE SEARCH FUNCTIONALITY------------------------------------------*/
 /**
- * This code snippet is responsible for integrating search functionality into the application and enables the application to display search results based on user input and interactively show/hide the search view using the provided search field and search results elements.By using these following variables and element selections, the application can track user input in the search field, manage API calls based on the input, and display the search results in the specified search result container.
+ * By using these following variables and element selections, the application can track user input in the search field, manage API calls based on the input, and display the search results in the specified search result container.
 */
+
 
 const searchField = document.querySelector("[data-search-field]");
-// This variable holds the reference to the HTML element with the attribute [data-search-field]. It represents the input field where the user can enter their search query.
+// It represents the input field where the user can enter their search query.
+
 
 const searchResult = document.querySelector("[data-search-result]");
-// This variable holds the reference to the HTML element with the attribute [data-search-result]. It represents the container where the search results will be displayed.
+// It represents the container where the search results will be displayed.
+
 
 let searchTimeout = null;
-// This variable is initialized with null. It will be used to store the timeout ID returned by the setTimeout function when scheduling a search API call after a certain delay. It helps to manage the timing of API requests based on user input.
+// This variable will be used to store the timeout ID returned by the setTimeout function when scheduling a search API call after a certain delay. It helps to manage the timing of API requests based on user input.
+
 
 const searchTimeoutDuration = 500;
-// This variable is set to 500. It represents the time duration (in milliseconds) that the application will wait after the user stops typing before making the search API call. This delay helps to prevent excessive API requests while the user is still typing their query.
+// This variable represents the time duration (in milliseconds) that the application will wait after the user stops typing before making the search API call. This delay helps to prevent excessive API requests while the user is still typing their query.
 
 
 
 
 
 
-
-/*-------------------------------------------THE SEARCH FUNCTIONALITY------------------------------------------*/
-
-
-
+/*----------------------------------------------------THE SEARCH FUNCTIONALITY----------------------------------------------------*/
 /*
-This following code adds an event listener to the searchField input element. The listener is triggered whenever the user types or changes the input in the search field. The purpose of this event listener is to implement the search functionality. The search results are displayed as a list of locations (e.g., cities) matching the user's search query. Each location is represented as a list item (<li>) with relevant information, such as the location name, country, and state. When the user clicks on a search result, the toggleSearch function is called to close the search view (searchView.classList.remove("active")), and the searchResult element is cleared (searchResult.classList.remove("active")) to hide the search results. The addEventOnElements function is used to add click event listeners to each search result item to handle these actions. When the user interacts with the search field by typing or clearing the input, this block of code is responsible for managing the visual display of the search results container and updating the appearance of the search field based on the search state (whether a search is in progress or not).
+The following code adds an event listener to the searchField input element. The listener is triggered whenever the user types or changes the input in the search field. 
+The search results are displayed as a list of locations (e.g., cities) matching the user's search query. 
+When the user clicks on a search result, the toggleSearch function is called to close the search view (searchView.classList.remove("active")), and the searchResult element is cleared (searchResult.classList.remove("active")) to hide the search results. 
+The addEventOnElements function is used to add click event listeners to each search result item to handle these actions. 
 */
+
+
+
+
 searchField.addEventListener("input", function () {
   searchTimeout ?? clearTimeout(searchTimeout);
-  // This line checks if searchTimeout is not null using the nullish coalescing operator (??). If searchTimeout is not null, it means that a previous search request is scheduled, and the code clears that timeout using clearTimeout. This ensures that the search API request is made only when the user stops typing for the specified duration.
 
-  if (!searchField.value) {
-    searchResult.classList.remove("active");
-    searchResult.innerHTML = "";
-    searchField.classList.remove("searching");
-  } else {
-    searchField.classList.add("searching");
+  if (!searchField.value) // If the search field is empty, it means the user has cleared the input 
+  {
+    searchResult.classList.remove("active"); // Removes the "active" class from the searchResult element, hiding the search results container.
+    
+    searchResult.innerHTML = ""; // Clears the content inside the searchResult element, removing any previously displayed search results.
+    
+    searchField.classList.remove("searching"); //Removes the "searching" class from the searchField element, which may have been added earlier if the user was                                                       typing a query.
+  } 
+  else 
+  {
+    searchField.classList.add("searching"); // adding the CSS class "searching" to the searchField element to provide visual feedback to the user that their                                                     search query is being processed.
   }
-  /*
-  This block checks whether the search field is empty (searchField.value is an empty string). 
+
+
+
   
-If the search field is empty, it means the user has cleared the input, so the code performs the following actions :-
-
-searchResult.classList.remove("active"): Removes the "active" class from the searchResult element, hiding the search results container.
-
-searchResult.innerHTML = "": Clears the content inside the searchResult element, removing any previously displayed search results.
-
-searchField.classList.remove("searching"): Removes the "searching" class from the searchField element, which may have been added earlier if the user was typing a query.
-
- If the search field is not empty (i.e., the else part of the conditional statement) :- 
-
- searchField.classList.add("searching"): this line adds the CSS class "searching" to the searchField element. This class is used to visually indicate that a search request is in progress. Adding the class changes the appearance of the search field to provide visual feedback to the user that their search query is being processed.
-*/
-
-
-
-
-
-
 /*
-This code block is an event listener attached to the input event of the searchField element. It is triggered whenever the user inputs or changes the value in the search field. When the user types in the search field, this event listener triggers a search request after a short delay (to avoid rapid API calls). Once the location data is fetched, the search results are displayed in a container, and clicking on any search result item will close the search results container and populate the search field with the selected location.
+This following code is an event listener attached to the input event of the searchField element. When the user types in the search field, this event listener triggers a search request after a short delay (to avoid rapid API calls). Once the location data is fetched, the search results are displayed in a container, and clicking on any search result item will close the search results container and populate the search field with the selected location.
 */
+  
   if (searchField.value) {
 
     searchTimeout = setTimeout(() => {
-      // this line sets a timeout using setTimeout function. The function inside the setTimeout is a callback function that will be executed after the specified searchTimeoutDuration (in milliseconds) has passed. The purpose of this timeout is to add a slight delay before performing the actual search request. This can help prevent making too many API requests in quick succession while the user is still typing.
-
 
 
       fetchData(url.geo(searchField.value), function (locations) {
-        // this line calls the fetchData function to fetch the location data from the API based on the search query in the searchField.value. The url.geo(searchField.value) generates the API URL for the search query. Once the location data is fetched, the following steps are executed :-
-
 
 
         searchField.classList.remove("searching");
-        //  Removes the CSS class "searching" from the searchField element, which indicates that the search is no longer in progress.
-
+        //  Removes the CSS class "searching" from the searchField element indicating that the search is no longer in progress.
 
 
         searchResult.classList.add("active");
@@ -182,18 +146,14 @@ This code block is an event listener attached to the input event of the searchFi
         searchResult.innerHTML = `
                 <ul class="view-list" data-search-list></ul>
                 `;
-        // Sets the innerHTML of the searchResult element to a new HTML content, which includes an unordered list (<ul>) with a class of "view-list". This will be used to display the search results.
-
+        // This will be used to display the search results.
 
 
         const /** {NodeList} | [] */ items = [];
 
 
-
         for (const { name, lat, lon, country, state } of locations) {
-          // This is a for...of loop that iterates through the locations data fetched from the API. For each location, it creates a new list item (<li>) with appropriate content based on the location data. It includes the location name, latitude, longitude, country, and state (if available) along with relevant CSS classes for styling.
-
-
+          
 
           const searchItem = document.createElement("li");
           // This creates a new list item element (<li>) in the DOM, which will represent a single search result in the list of search results.
@@ -201,8 +161,7 @@ This code block is an event listener attached to the input event of the searchFi
 
 
           searchItem.classList.add("view-item");
-          // It adds the CSS class "view-item" to the created list item. The "view-item" class contains styling rules to format and style the appearance of the search result item.
-
+          // It adds the CSS class "view-item" which contains styling rules to format and style the appearance of the search result item.
 
 
           searchItem.innerHTML = `
@@ -284,11 +243,12 @@ export const updateWeather = function (lat, lon) {
 
   /*-----------------MAKING READY WEATHER STYLING-----------------*/
 /*
-This part is only responsible for preparing the elements on the web page and adjusting their styles and attributes. The actual data fetching and content updating would likely be handled elsewhere in the code.
+This part is only responsible for preparing the elements on the web page and adjusting their styles and attributes.
 */
   loading.style.display = "grid";
   container.style.overflowY = "hidden";
   container.classList.remove("fade-in");
+  
   errorContent.style.display = "none";
   // To hide error if previously error was shown.
 
@@ -303,8 +263,10 @@ This part is only responsible for preparing the elements on the web page and adj
   highlightSection.innerHTML = "";
   hourlySection.innerHTML = "";
   forecastSection.innerHTML = "";
-  // These four lines clear the contents of the respective sections. This is done to ensure that the sections are empty before updating them with new weather data.
+  // These four lines clear the contents of the respective sections to ensure that the sections are empty before updating them with new weather data.
 
+
+  
   if (window.location.hash === "#/current-location") {
     currentLocationBtn.setAttribute("disabled", "");
   } else {
@@ -316,19 +278,12 @@ This part is only responsible for preparing the elements on the web page and adj
 
 
 
-
   /*-----------------MAIN FORECASTING BEGINS-----------------*/
-
-
 
   /**
    * CURRENT WEATHER SECTION
-   * This "updateWeather" function is responsible for fetching weather data from different APIs based on the provided latitude (lat) and longitude (lon) coordinates and then updating the web page with the retrieved weather information.
   */
   fetchData(url.currentWeather(lat, lon), function (currentWeather) {
-    // The function starts with a call to "fetchData", which is a function used for making API requests. The function is passed a URL constructed using url.currentWeather(lat, lon), where url.currentWeather is a function that generates the appropriate URL for fetching the current weather data using the provided latitude and longitude.
-
-
 
     const {
       weather,
@@ -346,7 +301,7 @@ This part is only responsible for preparing the elements on the web page and adj
 
     const card = document.createElement("div");
     card.classList.add("card", "card-lg", "current-weather-card");
-    // It creates an HTML element (a div element with class names "card", "card-lg", and "current-weather-card") to display the current weather information. The relevant data from the currentWeather object is used to fill in the content of this element.
+    // It creates an HTML element to display the current weather information. The relevant data from the currentWeather object is used to fill in the content of this element.
 
 
 
@@ -377,18 +332,10 @@ This part is only responsible for preparing the elements on the web page and adj
 
     fetchData(url.reverseGeo(lat, lon), function ([{ name, country }]) {
       card.querySelector("[data-location]").innerHTML = `${name}, ${country}`;
-    });
-    // It then fetches reverse geolocation data (based on the latitude and longitude) using fetchData(url.reverseGeo(lat, lon)). The function receives an array containing location-related data, and it updates the "data-location" element within the previously created card element with the location name and country.
-
-
-
+    });.
 
     currentWeatherSection.appendChild(card);
     // The card element displaying the current weather information is appended to the currentWeatherSection element, to display it on the web page.
-
-
-
-
 
 
     /**
