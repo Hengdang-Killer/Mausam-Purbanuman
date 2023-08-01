@@ -1,34 +1,20 @@
 /*-------------------------------------FUNCTION OF THIS FILE-------------------------------------*/
-/* This file sets up the routing and handling of actions for a weather app. It uses the HTML5 History API to manage the app's navigation. This code sets up the routing mechanism for the weather app, allowing the user to navigate between the current location and searched locations based on the URL hash. The updateWeather function is called to fetch weather data for the selected locations, and the error404 function is called when an invalid route is encountered.
+/* This file sets up the routing and handling of actions allowing the user to navigate between the current location and searched locations based on the URL hash. It uses the HTML5 History API to manage the app's navigation. The updateWeather function is called to fetch weather data for the selected locations, and the error404 function is called when an invalid route is encountered.
 */
-
-
-
 
 
 "use strict";
-/*
-This directive is a statement that enables strict mode for the entire script or a specific function. When "use strict"; is used at the beginning of a script or a function, it enables a stricter set of rules and better error handling in the code, helping developers write more robust and secure JavaScript.
-*/
 
 
-
-
-
-
+/*---------------------------------IMPORTING MODULES-------------------------------------*/
 import { updateWeather, error404 } from "./app.js";
-// This imports two functions, updateWeather and error404, from the ./app.js file. These functions are part of the weather app's core functionality.
-
-
 
 
 
 
 /*---------------------------------DEFAULT LOCATION-------------------------------------*/
 const defaultLocation = "#/weather?lat=24.833271&lon=92.778908";
-// This sets a default location using latitude and longitude values in the form of a URL hash (defaultLocation). This location is used when geolocation is not available or when there is an error retrieving the user's current location.
-
-
+// This location is used when geolocation is not available or when there is an error retrieving the user's current location.
 
 
 
@@ -53,8 +39,6 @@ This function is responsible for obtaining the user's current location using the
 
 
 
-
-
 /*---------------------------------SEARCHED LOACTION WEATHER FORECAST ROUTING-------------------------------------*/
 /**
  *
@@ -71,21 +55,14 @@ The updateWeather function is called with the latitude and longitude as separate
 
 
 
-
-
-
 /*---------------------------------MAPPING LINKS TO FUNCTIONS-------------------------------------*/
 const routes = new Map([
   ["/current-location", currentLocation],
   ["/weather", searchedLocation],
 ]);
 /*
-The routes variable is a Map object that maps route paths to corresponding functions. It contains two entries:
-"/current-location" maps to the currentLocation function.
-"/weather" maps to the searchedLocation function.
+The routes variable is a Map object that maps route paths to corresponding functions.
 */
-
-
 
 
 
@@ -109,17 +86,11 @@ The checkHash function is responsible for checking the current URL hash, extract
 
 
 
-
-
-
 /*---------------------------------NAVIGATION WHEN URL IS CHANGED-------------------------------------*/
 window.addEventListener("hashchange", checkHash);
 /*
 When the hashchange event is triggered (e.g., when the URL hash changes due to navigation), it calls the checkHash function to handle the navigation. 
 */
-
-
-
 
 
 
