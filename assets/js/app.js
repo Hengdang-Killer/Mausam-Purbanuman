@@ -332,7 +332,7 @@ This part is only responsible for preparing the elements on the web page and adj
 
     fetchData(url.reverseGeo(lat, lon), function ([{ name, country }]) {
       card.querySelector("[data-location]").innerHTML = `${name}, ${country}`;
-    });.
+    });
 
     currentWeatherSection.appendChild(card);
     // The card element displaying the current weather information is appended to the currentWeatherSection element, to display it on the web page.
