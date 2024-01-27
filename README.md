@@ -25,33 +25,6 @@ https://mausam-purmanuman.netlify.app
 
 ![Screenshot (278)](https://github.com/Hengdang-Killer/Mausam-Purbanuman/assets/136807333/f330f512-8a74-45b8-a787-bb043a8ec653)
 
-## Run Locally
-
-Clone the project
-
-```bash
-  git clone https://link-to-project
-```
-
-Go to the project directory
-
-```bash
-  cd my-project
-```
-
-Open with VSCode
-
-```bash
-  code .
-```
-
-Open with live server
-
-```bash
-  npm run start
-```
-
-
 ## Author
 
 - [@Upamdeep](https://www.github.com/HengdangKiller)
